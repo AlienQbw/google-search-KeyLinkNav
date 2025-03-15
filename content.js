@@ -4,7 +4,29 @@ let searchLinks = [];
 function updateLinks() {
   searchLinks = Array.from(document.querySelectorAll('a')).filter((link) => {
     const parent = link.closest('div');
-    return parent && parent.querySelector('h3') && link.href && !link.href.includes('google.');
+    let validate =
+      parent && (parent.querySelector('h3') || link.href.includes('youtube.')) && !link.closest('div[data-initq');
+    link.href &&
+      !link.closest('[data-visible="false"]') &&
+      link.getAttribute('data-visible') !== 'false' &&
+      !link.closest('[style*="display: none"]');
+
+    const style = window.getComputedStyle(link);
+    if (style.display === 'none' || style.visibility === 'hidden') {
+      return false;
+    }
+    if (style.opacity === '0') {
+      return false;
+    }
+
+    if (link.offsetWidth === 0 && link.offsetHeight === 0) {
+      return false;
+    }
+    if (link.offsetParent === null) {
+      return false; // Element is likely outside the viewport or off-screen.
+    }
+
+    return validate;
   });
 }
 
