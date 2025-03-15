@@ -13,7 +13,7 @@ function styleLink(index) {
   if (currentIndex >= 0 && currentIndex < searchLinks.length) {
     const prevLink = searchLinks[currentIndex];
     prevLink.style.textDecoration = '';
-    prevLink.style.border = '';
+    prevLink.style.backgroundColor = '';
   }
 
   // Apply styling to new link
@@ -21,7 +21,7 @@ function styleLink(index) {
     currentIndex = index;
     const link = searchLinks[currentIndex];
     link.style.textDecoration = 'underline';
-    link.style.border = '2px solid blue';
+    link.style.backgroundColor = '#282828';
     link.scrollIntoView({ behavior: 'smooth', block: 'center' });
     link.focus();
   }
